@@ -1,3 +1,5 @@
+<%= javascript_pack_tag 'to_dos/index' %>
+
 <% @to_dos.each do |to_do| %>
   <%= link_to to_do.title, to_do_path(to_do),  method: :delete, data: { confirm: '本当に削除しますか？' } %>
   <%# nilが入ってた場合のエラーを防ぐためにdefaultを設定しておく %>
