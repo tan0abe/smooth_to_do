@@ -1,7 +1,7 @@
 <template>
   <el-table :data="toDos" style="width: 100%">
-    <el-table-column prop="title" label="title" width="180"></el-table-column>
-    <el-table-column prop="expired_at" label="expired_at" width="180"></el-table-column>
+    <el-table-column prop="title"></el-table-column>
+    <el-table-column prop="expired_at"></el-table-column>
   </el-table>
 </template>
 <script>
