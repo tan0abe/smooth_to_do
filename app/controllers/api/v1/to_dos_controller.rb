@@ -5,6 +5,8 @@ class Api::V1::ToDosController < ActionController::API
 
   def destroy
     to_do = ToDo.find_by(id: params[:id])
-    to_do.destroy
+    if to_do.destroy
+      render status: 200, json: { status: 200 }
+    end
   end
 end

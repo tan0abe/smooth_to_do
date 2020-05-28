@@ -11,6 +11,7 @@
 </template>
 <script>
 import axios from "axios";
+import { reject } from "lodash";
 export default {
   data() {
     return {
@@ -24,7 +25,11 @@ export default {
   },
   methods: {
     destroyToDo(id) {
-      axios.delete("/api/v1/to_dos/" + id).then(res => {});
+      axios.delete("/api/v1/to_dos/" + id).then(res => {
+        if (res.status === 200) {
+          this.toDos = reject(this.toDos, ["id", id]);
+        }
+      });
     }
   }
 };
