@@ -14,7 +14,7 @@
       </el-col>
     </el-row>
     <el-dialog :visible.sync="createToDoDialog" width="30%" center>
-      <to-do-form></to-do-form>
+      <to-do-form @close="closeDialog"></to-do-form>
     </el-dialog>
   </div>
 </template>
@@ -60,6 +60,9 @@ export default {
     },
     filter(toDos, finished) {
       return filter(toDos, ["finished", finished]);
+    },
+    closeDialog() {
+      this.createToDoDialog = false;
     }
   }
 };
