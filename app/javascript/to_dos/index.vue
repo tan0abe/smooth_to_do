@@ -14,7 +14,7 @@
       </el-col>
     </el-row>
     <el-dialog :visible.sync="createToDoDialog" width="30%" center>
-      <to-do-form @close="closeDialog"></to-do-form>
+      <to-do-form @close="closeDialog" @add="addToDo"></to-do-form>
     </el-dialog>
   </div>
 </template>
@@ -42,6 +42,9 @@ export default {
     ToDoForm
   },
   methods: {
+    addToDo(toDo) {
+      this.toDos.push(toDo);
+    },
     updateToDo(id, finished) {
       axios
         .patch("/api/v1/to_dos/" + id, { to_do: { finished: finished } })

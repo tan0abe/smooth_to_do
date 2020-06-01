@@ -41,6 +41,7 @@ export default {
         .then(res => {
           switch (res.status) {
             case 201:
+              this.$emit("add", res.data);
               this.toDo = { title: "", expiredAt: "" };
               this.$emit("close");
               break;
