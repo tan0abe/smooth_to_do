@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="toDos" style="width: 100%">
+  <el-table :data="toDos" style="width: 100%" @cell-dblclick="showInput">
     <el-table-column prop="finished">
       <template v-slot="scope">
         <el-checkbox
@@ -8,8 +8,24 @@
         ></el-checkbox>
       </template>
     </el-table-column>
-    <el-table-column prop="title"></el-table-column>
-    <el-table-column prop="expired_at"></el-table-column>
+    <el-table-column prop="title">
+      <template v-slot="scope">
+        <div>{{ scope.row.title }}</div>
+        <el-input class="hidden" v-model="scope.row.title"></el-input>
+      </template>
+    </el-table-column>
+    <el-table-column prop="expired_at">
+      <template slot-scope="scope">
+        <div>{{ scope.row.expired_at }}</div>
+        <el-date-picker
+          type="datetime"
+          format="yyyy/MM/dd HH:mm"
+          value-format="yyyy/MM/dd HH:mm"
+          class="hidden"
+          v-model="scope.row.expired_at"
+        ></el-date-picker>
+      </template>
+    </el-table-column>
     <el-table-column width="120">
       <template v-slot="scope">
         <el-button
@@ -25,6 +41,24 @@
 
 <script>
 export default {
-  props: ["toDos"]
+  props: ["toDos"],
+  methods: {
+    showInput(row, column, cell, event) {
+      console.log(cell);
+
+      let children = cell.firstElementChild.children;
+      children[0].classList.add("hidden");
+      children[1].classList.remove("hidden");
+
+      let input = children[1].firstElementChild;
+      input.focus();
+    }
+  }
 };
 </script>
+
+<style scoped>
+.hidden {
+  display: none;
+}
+</style>
