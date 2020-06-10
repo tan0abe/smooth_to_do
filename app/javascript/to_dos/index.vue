@@ -27,7 +27,8 @@ export default {
   data() {
     return {
       toDos: [],
-      activeName: "toDo"
+      activeName: "toDo",
+      createToDoDialog: false
     };
   },
   created() {
@@ -39,6 +40,9 @@ export default {
     ToDoTable
   },
   methods: {
+    addToDo(toDo) {
+      this.toDos.push(toDo);
+    },
     updateToDo(id, finished) {
       axios
         .patch("/api/v1/to_dos/" + id, { to_do: { finished: finished } })
@@ -57,6 +61,9 @@ export default {
     },
     filter(toDos, finished) {
       return filter(toDos, ["finished", finished]);
+    },
+    closeDialog() {
+      this.createToDoDialog = false;
     }
   }
 };
